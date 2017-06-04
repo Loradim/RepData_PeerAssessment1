@@ -1,4 +1,5 @@
 # Reproducible Research: Peer Assessment 1
+Heiko Lange  
 
 ## Loading and preprocessing the data
 Unzip and load data and do necessary/helpful transformations.
