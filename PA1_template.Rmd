@@ -37,6 +37,8 @@ t <- tapply(activity$steps, activity$interval, mean, na.rm = T)
 plot(t, type = "l", main = "Activity seems to be the highest between 8 and 9 in the morning", ylab = "Avg # of steps", xlab = "Time interval", axes = F)
 axis(2)
 axis(1, at = 1:length(t), labels = names(t))
+print("Interval with max average steps and average steps at that interval")
+which.max(t)
 ```
 
 ## Imputing missing values
@@ -50,6 +52,15 @@ activity2$f <- NULL
 quantile(activity2$steps, probs = seq(0,1,0.1))
 ```
 As seen, imputing values did slightly change the quantiles
+
+Output first chart again with imputed values:
+```{r}
+stepsPerDay2 <- tapply(activity$steps, activity$date, sum, na.rm = T)
+b2 <- seq(0, 22000, length.out = 12)
+hist(stepsPerDay2, breaks = b2, main = "Number of days with amount of Steps (imputed)", ylab = "# of days", xlab = "# of Steps", axes = F)
+axis(2)
+axis(1, at = b2, labels = b2)
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ```{r}

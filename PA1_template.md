@@ -38,6 +38,23 @@ axis(1, at = 1:length(t), labels = names(t))
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
+```r
+print("Interval with max average steps and average steps at that interval")
+```
+
+```
+## [1] "Interval with max average steps and average steps at that interval"
+```
+
+```r
+which.max(t)
+```
+
+```
+## 835 
+## 104
+```
+
 ## Imputing missing values
 Try to impute missing values with meaningful values. Therefore we will consider both interval and weekday, as I assume weekday has an significant impact on the activity (we will see later in the next part of the exercise). Missing values will be filled by the median of all other matching weekday + intervall.
 
@@ -64,6 +81,18 @@ quantile(activity2$steps, probs = seq(0,1,0.1))
 ```
 As seen, imputing values did slightly change the quantiles
 
+Output first chart again with imputed values:
+
+```r
+stepsPerDay2 <- tapply(activity$steps, activity$date, sum, na.rm = T)
+b2 <- seq(0, 22000, length.out = 12)
+hist(stepsPerDay2, breaks = b2, main = "Number of days with amount of Steps (imputed)", ylab = "# of days", xlab = "# of Steps", axes = F)
+axis(2)
+axis(1, at = b2, labels = b2)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```r
@@ -77,7 +106,7 @@ temp <- aggregate(steps ~ interval + weekday2, data = activity2, mean)
 ggplot(temp, aes(interval, steps)) + geom_line() + facet_grid(weekday2 ~ .) + xlab("Interval (5 min)") + ylab("# of steps") + ggtitle("Differences in number of steps in weekdays/weekends")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 
 
